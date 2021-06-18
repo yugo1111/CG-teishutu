@@ -92,12 +92,17 @@ var materials = [
   var update = function() {
     requestAnimationFrame(update);
 
-   
-    renderer.render(scene, camera);
-  };
+   tick();
+     function tick() {
+        renderer.render(scene, camera);
+     requestAnimationFrame(tick);
+  }
   update();
 }
   window.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
+  <body>
+    <canvas id="myCanvas"></canvas>
+  </body>
 </html>
