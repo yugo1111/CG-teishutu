@@ -8,6 +8,7 @@
   <!-- <script src="./three.js"></script> -->
   <!-- three.jsを読み込む(CDN) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
+<script src="OrbitControls.js"></script>
 
 </head>
 <body>
@@ -29,10 +30,13 @@
     var scene = new THREE.Scene();
   
       // カメラを作成(画角、縦横比、カメラからの距離前、後）
-      var camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
+      var camera = new THREE.PerspectiveCamera(45, width / height);
 　  // カメラの座標
 　   camera.position.set( 0, 2, 3);
      camera.lookAt(new THREE.Vector3(0, 1, 0));
+    
+    // カメラコントローラーを作成
+        const controls = new THREE.OrbitControls(camera,document.body);
 
 //6面分のテクスチャー読み込み
 var materials = [
