@@ -41,14 +41,16 @@ var materials = [
      new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("img/img_bb.png")}),
   ];
     
-    var textureLoader=new THREE.TextureLoader();
-    var texture = textureLoader.load("stone.jpg");
-    var mat = new THREE.MeshPhongMaterial();
-    mat.map = texture;
-    
-    var bump = textureLoader.load("stone-bump.jpg");
-    mat.bumpMap = bump;
-    mat.bumpscale = 0.2;
+    // テクスチャー読み込み
+   var textureLoader = new THREE.TextureLoader();  
+  var texture = textureLoader.load("stone.jpg");
+  var mat = new THREE.MeshPhongMaterial();
+  mat.map = texture;
+  
+  // バンプマップ読み込み
+  var bump = textureLoader.load("stone-bump.jpg");
+  mat.bumpMap = bump;
+  mat.bumpscale = 0.2;
  
    var material = new THREE.MeshFaceMaterial(materials); // マテリアルをセット
     
