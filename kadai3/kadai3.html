@@ -55,12 +55,24 @@ var materials = [
   var geometry = new THREE.BoxGeometry(1, 2, 0.5);
   var box1 = new THREE.Mesh(geometry, material);
   box1.position.set(1.25,0,1.25);
+    
+    var box2 = new THREE.Mesh(geometry, material);
+    box2.position.set(1.25,0,-1.25);
+    //
+    var box3 = new THREE.Mesh(geometry, material);
+    box3.position.set(-1.25,0,1.25);
+    //
+    var box4 = new THREE.Mesh(geometry, material);
+    box4.position.set(-1.25,0,-1.25);
 
  //全体のオブジェクト
 
  const all = new THREE.Group();
      all.add(plane);//平面を追加
      all.add(box1); // ペンギンを追加
+    all.add(box2);
+    all.add(box3);
+    all.add(box4);
      all.position.set(0,0,-5);//全体グループの原点の位置
  scene.add(all); 
 
