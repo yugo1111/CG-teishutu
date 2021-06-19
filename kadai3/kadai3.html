@@ -1,107 +1,68 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>sample_city</title>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="OrbitControls.js"></script>
+    <script>
+      // ページの読み込みを待つ
+      window.addEventListener('load', init);
 
-  <!-- three.jsを読み込む(ローカル) -->
-  <!-- <script src="./three.js"></script> -->
-  <!-- three.jsを読み込む(CDN) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
+      function init() {
+        // サイズを指定
+        const width = 960;
+        const height = 540;
 
-</head>
-<body>
- <script>
-  var init = function() {
+        // レンダラーを作成
+        const renderer = new THREE.WebGLRenderer({
+          canvas: document.querySelector('#myCanvas')
+        });
+        renderer.setSize(width, height);
 
-    var width = 800,
-        height = 600;
-  
-    // レンダラーを作成
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setSize(width, height);
-    document.body.appendChild(renderer.domElement);
-  
-    // シーンを作成
-    var scene = new THREE.Scene();
-  
-      // カメラを作成
+        // シーンを作成
+        const scene = new THREE.Scene();
+
+        // カメラを作成
         const camera = new THREE.PerspectiveCamera(45, width / height);
         // カメラの初期座標を設定
         camera.position.set(0, 0, 1000);
 
         // カメラコントローラーを作成
         const controls = new THREE.OrbitControls(camera,document.body);
-
-//6面分のテクスチャー読み込み
-var materials = [
-     new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("img/img_bsl.png")}),
-     new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("img/img_bsr.png")}),
-     new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("img/img3.png")}),
-     new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("img/img4.png")}),
-     new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("img/img_bf.png")}),
-     new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("img/img_bb.png")}),
-  ];
- 
-   var material = new THREE.MeshFaceMaterial(materials); // マテリアルをセット
-
-  // 平面を作成
-  var planeGeometry = new THREE.PlaneGeometry(5,5,5,5);
-  var planeMaterial = new THREE.MeshBasicMaterial({color: 0x00ff00});
-  var plane = new THREE.Mesh(planeGeometry,planeMaterial);
-  plane.rotation.set( -Math.PI/2, 0, 0 );
-  plane.position.set(0,-1,0);
-
-
-  // 箱を作成
-  var geometry = new THREE.BoxGeometry(1, 2, 0.5);
-  var box = new THREE.Mesh(geometry, material);
-  box.position.set(0,0,0);
-
- //全体のオブジェクト
-
- const all = new THREE.Group();
-     all.add(plane);//平面を追加
-     all.add(box); // ペンギンを追加
-     all.position.set(0,0,-5);//全体グループの原点の位置
- scene.add(all); 
-
-  // 平行光源1
-  var directionalLight1 = new THREE.DirectionalLight(0xffffff);
-  directionalLight1.position.set(1, 1, 1);
-  // シーンに追加
-  scene.add(directionalLight1);
-    
-   // 平行光源2
+  
+        // 平行光源1
+        var directionalLight1 = new THREE.DirectionalLight(0xffffff);
+        directionalLight1.position.set(100, 100, 100);
+        // シーンに追加
+        scene.add(directionalLight1);
+        // 平行光源2
         var directionalLight2 = new THREE.DirectionalLight(0xffffff);
         directionalLight2.position.set(-100, 100, 100);
         // シーンに追加
         scene.add(directionalLight2);
 
-  var directionalLight2 = new THREE.DirectionalLight(0xffffff);
-  directionalLight2.position.set(-10, 1, 1);
-  // シーンに追加
-  scene.add(directionalLight2);
+        // テクスチャー読み込み
+        var textureLoader = new THREE.TextureLoader();  
+        var texture = textureLoader.load("img/earth.png");
+        var mat = new THREE.MeshPhongMaterial();
+        mat.map = texture;
 
- var directionalLight3 = new THREE.DirectionalLight(0xffffff);
-  directionalLight3.position.set(1, -10, 1);
-  // シーンに追加
-  scene.add(directionalLight3);
+        // 地球を作成(原点に作成)
+        var geometry = new THREE.SphereGeometry(300, 30, 30);
+        var earth = new THREE.Mesh(geometry, mat);
+        scene.add(earth);
 
-  // 初回実行
-  var update = function() {
-    requestAnimationFrame(update);
+        tick();
 
-   tick();
-     function tick() {
-        renderer.render(scene, camera);
-     requestAnimationFrame(tick);
-  }
-  update();
-}
-  window.addEventListener('DOMContentLoaded', init);
-</script>
-</body>
+        // 毎フレーム時に実行されるループイベントです
+        function tick() {
+          // レンダリング
+          renderer.render(scene, camera);
+          requestAnimationFrame(tick);
+        }
+      }
+    </script>
+  </head>
+
   <body>
     <canvas id="myCanvas"></canvas>
   </body>
