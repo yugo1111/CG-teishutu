@@ -97,7 +97,8 @@ var materials = [
         // 木0を作成(原点に作成)
         var geometry = new THREE.PlaneGeometry(0.5, 0.5);
         var tree0 = new THREE.Mesh(geometry, mat0);
-        scene.add(tree0);
+        tree0.position.set(1,0,1.25);
+        
 
  //全体のオブジェクト
 
