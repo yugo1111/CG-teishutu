@@ -32,8 +32,10 @@
       const camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
 　  // カメラの座標
 　   camera.position.set( 0, 2, 3);
-     camera.lookAt(new THREE.Vector3(0, 1, 0));
-
+     
+// カメラコントローラーを作成
+        const controls = new THREE.OrbitControls(camera,document.body);
+    
 //6面分のテクスチャー読み込み
 var materials = [
      new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("img/img_bsl.png")}),
