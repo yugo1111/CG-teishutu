@@ -41,7 +41,7 @@ var materials = [
      new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("img/img_bb.png")}),
   ];
     
-    var textureLoader=new THREE,TextureLoader();
+    var textureLoader=new THREE.TextureLoader();
     var texture = textureLoader.load("stone.jpg");
     var mat = new THREE.MeshPhongMaterial();
     mat.map = texture;
