@@ -33,7 +33,7 @@
       // カメラを作成(画角、縦横比、カメラからの距離前、後）
       const camera = new THREE.PerspectiveCamera(45, width / height);
 　  // カメラの座標
-　   camera.position.set( 0, 0,10);
+　   camera.position.set( 0, 0,5);
    
     
     // カメラコントローラーを作成
@@ -94,7 +94,7 @@ var materials = [
         const material0 = new THREE.SpriteMaterial({ map: texture0,});
 
         const sprite0 = new THREE.Sprite(material0);
-        sprite0.position.x = 0;
+        sprite0.position.x = 1;
         sprite0.position.y = 1;
         sprite0.position.z = 0;
         sprite0.scale.set(1,1,1);
