@@ -88,16 +88,17 @@ var materials = [
     var box4 = new THREE.Mesh(geometry, material);
     box4.position.set(-1.25,0,-1.25);
     
-    // 木0テクスチャー読み込み
+   // 木0をスプライトで作成
         var textureLoader = new THREE.TextureLoader();  
         var texture0 = textureLoader.load("img/original tree1.png");
-        var mat0 = new THREE.MeshLambertMaterial({transparent: true});
-        mat0.map = texture0;
+        const material0 = new THREE.SpriteMaterial({ map: texture0,});
 
-        // 木0を作成(原点に作成)
-        var geometry = new THREE.PlaneGeometry(0.5, 0.5);
-        var tree0 = new THREE.Mesh(geometry, mat0);
-        tree0.position.set(0.5,-0.75,1.25);
+        const sprite0 = new THREE.Sprite(material0);
+        sprite0.position.x = 0;
+        sprite0.position.y = 50;
+        sprite0.position.z = 0;
+        sprite0.scale.set(100,100,100);
+        scene.add(sprite0);
     
      // 木0テクスチャー読み込み
         var textureLoader = new THREE.TextureLoader();  
@@ -141,7 +142,7 @@ var materials = [
     all.add(box2);
     all.add(box3);
     all.add(box4);
-    all.add(tree0);
+    
     all.add(tree1);
     all.add(tree2);
     all.add(tree3);
